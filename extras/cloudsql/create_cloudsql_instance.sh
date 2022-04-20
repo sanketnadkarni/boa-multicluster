@@ -24,7 +24,7 @@ CSQL_EXISTS=$(gcloud sql instances list --filter="${INSTANCE_NAME}" | wc -l)
 if [ $CSQL_EXISTS = "0" ]; then
   echo "☁️ Creating Cloud SQL instance: ${INSTANCE_NAME} ..."
   gcloud sql instances create $INSTANCE_NAME \
-    --database-version=POSTGRES_12 --tier=db-custom-1-3840 \
+    --database-version=POSTGRES_12 --tier=db-custom-1-3840 --no-assign-ip --network="projects/prj-d-shared-base-e0f6/global/networks/vpc-d-shared-base-spoke" \
     --region=${DB_REGION} --project ${PROJECT_ID}
 fi
 

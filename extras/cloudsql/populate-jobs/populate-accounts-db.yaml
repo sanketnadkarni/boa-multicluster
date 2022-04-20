@@ -21,7 +21,7 @@ spec:
   template:
     spec:
       shareProcessNamespace: true # Important to stop all processes
-      serviceAccountName: boa-ksa
+      serviceAccountName: boa-wif
       containers:
       - name: sidecar-controller
         image: bash

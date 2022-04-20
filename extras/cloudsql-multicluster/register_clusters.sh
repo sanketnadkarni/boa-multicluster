@@ -41,18 +41,17 @@ gcloud projects add-iam-policy-binding ${HUB_PROJECT_ID} \
  --member="serviceAccount:${SERVICE_ACCOUNT_NAME}@${HUB_PROJECT_ID}.iam.gserviceaccount.com" \
  --role="roles/gkehub.connect"
 
-echo "🌏 Downloading service account key..."
-gcloud iam service-accounts keys create register-key.json \
+#echo "🌏 Downloading service account key..."
+#gcloud iam service-accounts keys create register-key.json \
   --iam-account=${SERVICE_ACCOUNT_NAME}@${HUB_PROJECT_ID}.iam.gserviceaccount.com \
   --project=${HUB_PROJECT_ID}
-
 
 echo "🌏 Registering cluster 1..."
 GKE_URI_1="https://container.googleapis.com/v1/projects/${PROJECT_ID}/zones/${CLUSTER_1_ZONE}/clusters/${CLUSTER_1_NAME}"
 gcloud container hub memberships register ${CLUSTER_1_NAME} \
     --project=${PROJECT_ID} \
     --gke-uri=${GKE_URI_1} \
-    --service-account-key-file=register-key.json
+    --enable-workload-identity
 
 
 echo "🌏 Registering cluster 2..."
@@ -60,7 +59,7 @@ GKE_URI_2="https://container.googleapis.com/v1/projects/${PROJECT_ID}/zones/${CL
 gcloud container hub memberships register ${CLUSTER_2_NAME} \
     --project=${PROJECT_ID} \
     --gke-uri=${GKE_URI_2} \
-    --service-account-key-file=register-key.json
+    --enable-workload-identity
 
 echo "🌏 Listing your Anthos cluster memberships:"
 gcloud container hub memberships list

@@ -22,7 +22,7 @@ export GSA_NAME="boa-gsa"
 gcloud config set project ${PROJECT_ID}
 
 echo "✅ Creating namespace..."
-kubectl create namespace $NAMESPACE
+#kubectl create namespace $NAMESPACE
 
 echo "✅ Creating GCP and K8s service accounts..."
 kubectl create serviceaccount --namespace $NAMESPACE $KSA_NAME
@@ -59,4 +59,4 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
 
 echo "⭐️ Done."
 
-# [END gke_cloudsql_setup_workload_identity]
+## [END gke_cloudsql_setup_workload_identity]
